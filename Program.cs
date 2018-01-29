@@ -20,7 +20,7 @@ namespace Lickr
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://*:9076")
+                .UseUrls("http://localhost:9076")
                 .Build();
     }
 }
