@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Lickr.Models;
 
-namespace Lickr.Presenters
+namespace Lickr.SongHandlers
 {
-    public class YoutubePresenter : IPresenter
+    public class YoutubeSongHandler : ISongHandler
     {
         private readonly Regex regex = new Regex("youtube.com\\/watch\\?v=(.*)");
         public IHtmlContent Present(IHtmlHelper html, Song song)
@@ -18,6 +18,17 @@ namespace Lickr.Presenters
                 Start = song.Start.Minutes*60 + song.Start.Seconds,
                 End = song.End.Minutes*60 + song.End.Seconds
             });
+        }
+
+        public bool Validate(Song song)
+        {
+            // TODO implement this
+            throw new NotImplementedException();
+        }
+
+        public IHtmlContent SubmissionForm(IHtmlHelper html)
+        {
+            throw new NotImplementedException();
         }
     }
 }
