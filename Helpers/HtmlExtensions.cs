@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Lickr.Models;
-using Lickr.Presenters;
+using Lickr.SongHandlers;
 
 
 namespace Lickr.Helpers
@@ -11,17 +11,17 @@ namespace Lickr.Helpers
     {
         public static IHtmlContent SongDisplayFor(this IHtmlHelper html, Song song)
         {
-            IPresenter presenter;
+            ISongHandler handler;
             switch (song.Type)
             {
                 case SourceType.YOUTUBE:
-                    presenter = new YoutubePresenter();
+                    handler = new YoutubeSongHandler();
                     break;
                 default:
-                    presenter = null;
+                    handler = null;
                     break;
             }
-            return presenter?.Present(html, song);
+            return handler?.Present(html, song);
         }
     }
 }
