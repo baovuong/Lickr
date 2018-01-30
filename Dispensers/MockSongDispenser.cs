@@ -17,8 +17,8 @@ namespace Lickr.Dispensers
                 {
                     Title = "7:00 AM",
                     Artist = "Tennyson", 
-                    Start = new DateTime(1,1,1,1, 1, 52),
-                    End = new DateTime(1,1,1,1, 1, 59),
+                    Start = new TimeSpan(0, 1, 52),
+                    End = new TimeSpan(0, 1, 59),
                     Source = "https://www.youtube.com/watch?v=kLIy9wxWCh8",
                     Type = SourceType.YOUTUBE
                 },
@@ -27,8 +27,8 @@ namespace Lickr.Dispensers
                 {
                     Title = "Spain",
                     Artist = "Chick Corea and Return to Forever",
-                    Start = new DateTime(1,1,1,1, 6, 11),
-                    End = new DateTime(1,1,1,1, 6, 15),
+                    Start = new TimeSpan(0, 6, 11),
+                    End = new TimeSpan(0, 6, 15),
                     Source = "https://www.youtube.com/watch?v=a_OEJ0wqt2g",
                     Type = SourceType.YOUTUBE
                 }
@@ -36,5 +36,8 @@ namespace Lickr.Dispensers
 
         }
         public Song Dispense() => songs.OrderBy(a => Guid.NewGuid()).First();
+
+        public void AddSong(Song song) {}
+        public void AcceptSong(long id) {}
     }
 }

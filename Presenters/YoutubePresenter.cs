@@ -15,8 +15,8 @@ namespace Lickr.Presenters
             return html.Partial("SongDisplay/YoutubePartial", new YoutubeSongViewModel
             {
                 VideoId = regex.Matches(song.Source).Cast<Match>().FirstOrDefault()?.Groups[1].Value,
-                Start = song.Start.Minute*60 + song.Start.Second,
-                End = song.End.Minute*60 + song.End.Second
+                Start = song.Start.Minutes*60 + song.Start.Seconds,
+                End = song.End.Minutes*60 + song.End.Seconds
             });
         }
     }
