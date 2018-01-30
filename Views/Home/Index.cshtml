@@ -1,3 +1,4 @@
+@using Lickr.Helpers
 @model Lickr.Models.Song
 
 @{
@@ -10,6 +11,7 @@
 <div id="lick">
     lick goes here.
     <h2>@Model.Title by @Model.Artist</h2>
-    <iframe width="640" height="270" src="https://www.youtube.com/embed/kLIy9wxWCh8?start=112&end=119&autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    @Html.SongDisplayFor(Model)
+    <!-- <iframe width="640" height="270" src="https://www.youtube.com/embed/kLIy9wxWCh8?start=112&end=119&autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 </div>
 <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Next</a>
