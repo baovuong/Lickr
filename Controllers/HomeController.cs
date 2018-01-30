@@ -18,10 +18,7 @@ namespace Lickr.Controllers
             _songDispenser = songDispenser;
         }
     
-        public IActionResult Index()
-        {
-            return View(_songDispenser.Dispense());
-        }
+        public IActionResult Index() => View(_songDispenser.Dispense());
 
         public IActionResult About()
         {
@@ -40,6 +37,11 @@ namespace Lickr.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Submit()
+        {
+            return View();
         }
     }
 }
