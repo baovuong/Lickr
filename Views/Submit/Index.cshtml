@@ -2,18 +2,19 @@
 
 <h2>Submission!</h2>
 
-<form>
+<form asp-controller="Submit" asp-action="Submit" method="post">
     <div class="form-group">
         <label asp-for="Source"></label>
         <input type="text" asp-for="Source" class="form-control">
     </div>
     <div class="form-group">
         <label asp-for="Start"></label>
-        <input type="text" asp-for="Start" class="form-control" pattern="[0-9]{1,2}:[0-9]{1,2}">
+        <input type="text" asp-for="Start" class="form-control" asp-format="{0:m\\:ss}" pattern="[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}">
     </div>
     <div class="form-group">
-        <label asp-for="End">End</label>
-        <input type="text" asp-for="End" class="form-control" pattern="[0-9]{1,2}:[0-9]{1,2}">
+        <label asp-for="End"></label>
+        <input type="text" asp-for="End" class="form-control" asp-format="{0:m\\:ss}" pattern="[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}">
+        <input type="range" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
