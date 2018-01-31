@@ -22,5 +22,10 @@ namespace Lickr.Controllers
         {
             return View();
         }
+
+        public IActionResult Submit(SongSubmissionViewModel model)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
