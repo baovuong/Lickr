@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Lickr.Models;
 using Lickr.Dispensers;
 
@@ -20,7 +21,14 @@ namespace Lickr.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var items = Enum.GetValues(typeof(SourceType))
+                .Cast<SourceType>()
+                .Select(_ => new SelectListItem { Text = _.ToString(), Value = ((int)_).ToString() });
+            
+            return View(new SongSubmissionViewModel
+            {
+                SourceTypeItems = items
+            });
         }
 
         public IActionResult Submit(SongSubmissionViewModel model)

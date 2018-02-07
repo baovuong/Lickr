@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Lickr.Models
 {
@@ -16,5 +18,10 @@ namespace Lickr.Models
         [Required]
         [Display(Name = "End Timestamp")]
         public TimeSpan End { get; set; }
+
+        [Display(Name = "Source Type")]
+        public SourceType Type { get; set; }
+
+        public IEnumerable<SelectListItem> SourceTypeItems { get; set; }
     }
 }
