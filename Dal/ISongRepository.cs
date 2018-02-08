@@ -6,6 +6,6 @@ namespace Lickr.Dal
 {
     public interface ISongRepository
     {
-        IEnumerable<SongViewModel> Songs { get; set; }
+        IEnumerable<Song> Songs { get; set; }
     }
 }
