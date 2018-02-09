@@ -3,27 +3,31 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization;
 using Lickr.Models;
+using System;
 
 namespace Blog.DotNetCoreMongoDb.Repository
 {
     public class MongoSongRepository
     {
-        protected static IMongoClient _client;
-        protected static IMongoDatabase _database;
-        protected IMongoCollection<Song> _collection;
+        protected static IMongoClient client { get; private set; }
+        protected static IMongoDatabase database { get; private set; }
+        protected IMongoCollection<Song> collection { get; private set; }
 
         public MongoSongRepository()
         {
-            _client = new MongoClient();
-            _database = _client.GetDatabase("lickrDb");
-            _collection = _database.GetCollection<Song>("songs");
+            client = new MongoClient();
+            database = client.GetDatabase("lickrDb");
+            collection = database.GetCollection<Song>("songs");
         }
 
-        public IEnumerable<Song> SelectAll()
-        {
-            var query = this._collection.Find(new BsonDocument()).ToListAsync();
-            return query.Result;
-        }
+        public IEnumerable<Song> SelectAll() => 
+            collection.Find(new BsonDocument()).ToList();
+
+        public void SaveSong(Song song) => collection.InsertOne(song);
+        
+        public Song GetRandomSong() => 
+            collection.Find(new BsonDocument()).SortBy(s => Guid.NewGuid()).First();
+
 
     }
 }
