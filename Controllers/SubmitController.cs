@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Lickr.Models;
 using Lickr.Dispensers;
+using Lickr.SongHandlers;
 
 namespace Lickr.Controllers
 {
     public class SubmitController : Controller
     {
         private readonly ISongDispenser _songDispenser;
+        private readonly Func<SourceType, ISongHandler> _handlerResolver;
 
-        public SubmitController(ISongDispenser songDispenser)
+        public SubmitController(ISongDispenser songDispenser, Func<SourceType, ISongHandler> handlerResolver)
         {
             _songDispenser = songDispenser;
+            _handlerResolver = handlerResolver;
         }
 
         public IActionResult Index()
@@ -33,6 +36,7 @@ namespace Lickr.Controllers
 
         public IActionResult Submit(SongSubmissionViewModel model)
         {
+            var handler = _handlerResolver(model.Type);
             return RedirectToAction("Index");
         }
 

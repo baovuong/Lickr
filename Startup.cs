@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Lickr.Dispensers;
+using Lickr.SongHandlers;
+using Lickr.Models;
 
 namespace Lickr
 {
@@ -25,6 +27,23 @@ namespace Lickr
             services.AddMvc();
             
             services.AddTransient<ISongDispenser, MockSongDispenser>();
+
+            services.AddTransient<ISongHandler, YoutubeSongHandler>();
+            services.AddTransient(factory => 
+            {
+                Func<SourceType, ISongHandler> accessor = key =>
+                {
+                    switch (key)
+                    {
+                        case SourceType.YOUTUBE: return factory.GetService<YoutubeSongHandler>();
+                        case SourceType.SPOTIFY: throw new KeyNotFoundException();
+                        default: throw new KeyNotFoundException();
+
+                    }
+                };
+                return accessor;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
