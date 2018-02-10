@@ -9,7 +9,7 @@ using Lickr.Dispensers;
 
 namespace Lickr.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ISongDispenser _songDispenser;
     

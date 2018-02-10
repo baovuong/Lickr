@@ -20,7 +20,7 @@ namespace Lickr.Models
         public TimeSpan End { get; set; }
 
         [Required]
-        [Display(Name = "Fuck")]
+        [Display(Name = "")]
         public SourceType Type { get; set; }
 
         public IEnumerable<SelectListItem> SourceTypeItems { get; set; }

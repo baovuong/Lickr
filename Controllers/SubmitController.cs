@@ -11,7 +11,7 @@ using Lickr.SongHandlers;
 
 namespace Lickr.Controllers
 {
-    public class SubmitController : Controller
+    public class SubmitController : BaseController
     {
         private readonly ISongDispenser _songDispenser;
         private readonly Func<SourceType, ISongHandler> _handlerResolver;
@@ -24,19 +24,18 @@ namespace Lickr.Controllers
 
         public IActionResult Index()
         {
-            var items = Enum.GetValues(typeof(SourceType))
-                .Cast<SourceType>()
-                .Select(_ => new SelectListItem { Text = _.ToString(), Value = ((int)_).ToString() });
-            
             return View(new SongSubmissionViewModel
             {
-                SourceTypeItems = items
+                SourceTypeItems = Enum.GetValues(typeof(SourceType))
+                    .Cast<SourceType>()
+                    .Select(_ => new SelectListItem { Text = _.ToString(), Value = ((int)_).ToString() })
             });
         }
 
         public IActionResult Submit(SongSubmissionViewModel model)
         {
             var handler = _handlerResolver(model.Type);
+            AddMessage("woo!");
             return RedirectToAction("Index");
         }
 
