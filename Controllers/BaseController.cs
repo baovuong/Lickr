@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Lickr.Models;
 using Lickr.Dispensers;
+using Lickr.Helpers;
 
 namespace Lickr.Controllers
 {
@@ -13,13 +14,13 @@ namespace Lickr.Controllers
     {
         public void AddMessage(string message, MessageType type = MessageType.DEFAULT)
         {
-            List<StatusMessage> messages = TempData.ContainsKey("Messages") ? TempData["Messages"] as List<StatusMessage> : new List<StatusMessage>();
+            var messages = TempData.ContainsKey("Messages") ? TempData.Get<List<StatusMessage>>("Messages") : new List<StatusMessage>();
             messages.Add(new StatusMessage
             {
                 Message = message,
                 Type = type
             });
-            TempData["Messages"] = messages;
+            TempData.Put("Messages", messages);
         }
     }
 }

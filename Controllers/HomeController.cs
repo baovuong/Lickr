@@ -18,7 +18,11 @@ namespace Lickr.Controllers
             _songDispenser = songDispenser;
         }
     
-        public IActionResult Index() => View(_songDispenser.Dispense());
+        public IActionResult Index()
+        {
+            AddMessage("FUCK");
+            return View(_songDispenser.Dispense());
+        } 
 
         public IActionResult About()
         {

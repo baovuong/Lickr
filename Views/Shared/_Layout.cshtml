@@ -1,4 +1,9 @@
 @using Lickr.Models
+@using Lickr.Helpers
+
+@{
+    var messages = TempData.Get<IEnumerable<StatusMessage>>("Messages") ?? Enumerable.Empty<StatusMessage>();  
+}
 
 <!DOCTYPE html>
 <html>
@@ -21,9 +26,9 @@
 </head>
 <body>
     <div class="container body-content">
-        @foreach (var message in (TempData["Messages"] as IEnumerable<StatusMessage>) ?? Enumerable.Empty<StatusMessage>())
+        @foreach (var message in messages)
         {
-            <div>@message.Type.ToString() + ": " + @message.Message</div>
+            <div>@message.Type.ToString(): @message.Message</div>
         }
         @RenderBody()
         <hr />
