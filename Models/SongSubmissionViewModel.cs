@@ -7,19 +7,19 @@ namespace Lickr.Models
 {
     public class SongSubmissionViewModel
     {
-        [Required]
+        //[Required]
         [Display(Name = "Source/URL")]
         public string Source { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Start Timestamp")]
         public TimeSpan Start { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "End Timestamp")]
         public TimeSpan End { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "")]
         public SourceType Type { get; set; }
 

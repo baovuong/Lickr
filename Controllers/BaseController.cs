@@ -13,16 +13,13 @@ namespace Lickr.Controllers
     {
         public void AddMessage(string message, MessageType type = MessageType.DEFAULT)
         {
-            if (ViewBag.Messages == null)
-            {
-                ViewBag.Messages = new List<StatusMessage>();
-            }
-
-            ViewBag.Messages.Add(new StatusMessage
+            List<StatusMessage> messages = TempData.ContainsKey("Messages") ? TempData["Messages"] as List<StatusMessage> : new List<StatusMessage>();
+            messages.Add(new StatusMessage
             {
                 Message = message,
                 Type = type
             });
+            TempData["Messages"] = messages;
         }
     }
 }
