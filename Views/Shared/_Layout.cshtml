@@ -1,3 +1,10 @@
+@using Lickr.Models
+@using Lickr.Helpers
+
+@{
+    var messages = TempData.Get<IEnumerable<StatusMessage>>("Messages") ?? Enumerable.Empty<StatusMessage>();  
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +22,14 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <div class="container body-content">
+        @foreach (var message in messages)
+        {
+            <div>@message.Type.ToString(): @message.Message</div>
+        }
         @RenderBody()
         <hr />
         <footer>

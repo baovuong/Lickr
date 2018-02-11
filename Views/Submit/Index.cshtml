@@ -1,0 +1,64 @@
+@model Lickr.Models.SongSubmissionViewModel
+
+<h2>Submission!</h2>
+
+<form asp-controller="Submit" asp-action="Submit" method="post">
+    <div class="form-group">
+        <label asp-for="Type"></label>
+        <select class="form-control" asp-for="Type" asp-items="Model.SourceTypeItems"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Source"></label>
+        <input type="text" asp-for="Source" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Start"></label>
+        <input id="startTimestamp" type="text" asp-for="Start" class="form-control" pattern="[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}">
+    </div>
+    <div class="form-group">
+        <label asp-for="End"></label>
+        <input id="endTimestamp" type="text" asp-for="End" class="form-control" pattern="[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}">
+    </div>
+    <div class="form-group">
+        <input id="timeSlider" class="form-control" type="text" data-slider-min="0" data-slider-max="120" data-slider-step="1" data-slider-value="[0, 120]" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
+    <style>
+        .slider.slider-horizontal {
+            width: 100%;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script>
+        function secondsToTimestamp(value) {
+            return moment.utc(moment.duration(value, 'seconds').asMilliseconds()).format('HH:mm:ss');
+        }
+
+        $(document).ready(function() {
+            $('#timeSlider').slider({
+                formatter: function(value) {
+                    if (value.constructor === Array) {
+                        return value.map(x => secondsToTimestamp(x)).join(' - ');
+                    }
+                    return secondsToTimestamp(value);
+                }
+            });
+
+            $('#timeSlider').on('slide', function(slideEvt) {
+                $('#startTimestamp').val(secondsToTimestamp(slideEvt.value[0]));
+                $('#endTimestamp').val(secondsToTimestamp(slideEvt.value[1]));
+
+            });
+        });
+    </script>
+}

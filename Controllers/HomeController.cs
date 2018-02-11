@@ -10,7 +10,7 @@ using Blog.DotNetCoreMongoDb.Repository;
 
 namespace Lickr.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ISongDispenser _songDispenser;
     
@@ -21,8 +21,9 @@ namespace Lickr.Controllers
     
         public IActionResult Index()
         {
+            AddMessage("FUCK");
             return View(_songDispenser.Dispense());
-        }
+        } 
 
         public IActionResult About()
         {

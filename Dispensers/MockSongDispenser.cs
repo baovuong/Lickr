@@ -31,6 +31,16 @@ namespace Lickr.Dispensers
                     End = new TimeSpan(0, 6, 15),
                     Source = "https://www.youtube.com/watch?v=a_OEJ0wqt2g",
                     Type = SourceType.YOUTUBE
+                },
+
+                new Song
+                {
+                    Title = "Mario Circuit",
+                    Artist = "Super Soul Bros.",
+                    Start = new TimeSpan(0, 2, 56),
+                    End = new TimeSpan(0, 3, 2),
+                    Source = "https://www.youtube.com/watch?v=02merJLHgNg",
+                    Type = SourceType.YOUTUBE
                 }
             };
 
