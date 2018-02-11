@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Lickr.Models;
 using Lickr.Dispensers;
+using Blog.DotNetCoreMongoDb.Repository;
 
 namespace Lickr.Controllers
 {
