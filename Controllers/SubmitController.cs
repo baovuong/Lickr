@@ -34,8 +34,22 @@ namespace Lickr.Controllers
 
         public IActionResult Submit(SongSubmissionViewModel model)
         {
-            var handler = _handlerResolver(model.Type);
-            AddMessage("woo!");
+            if (ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var valid = _handlerResolver(model.Type).Validate(new Song
+            {
+                Source = model.Source,
+                Start = model.Start,
+                End = model.End
+            });
+            if (!valid)
+            {
+                AddMessage("invalid values. try again.", MessageType.ERROR);
+                return View(model);
+            }
+            AddMessage("song has been submitted!", MessageType.SUCCESS);
             return RedirectToAction("Index");
         }
 
