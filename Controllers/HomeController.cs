@@ -21,7 +21,6 @@ namespace Lickr.Controllers
     
         public IActionResult Index()
         {
-            AddMessage("FUCK");
             return View(_songDispenser.Dispense());
         } 
 
