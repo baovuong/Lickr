@@ -2,7 +2,13 @@
 @using Lickr.Helpers
 
 @{
-    var messages = TempData.Get<IEnumerable<StatusMessage>>("Messages") ?? Enumerable.Empty<StatusMessage>();  
+    var messages = TempData.Get<IEnumerable<StatusMessage>>("Messages") ?? Enumerable.Empty<StatusMessage>();
+    var mapping = new Dictionary<MessageType, string>()
+    {
+        { MessageType.SUCCESS, "alert-success" },
+        { MessageType.ERROR, "alert-danger" },
+        { MessageType.DEFAULT, "alert-info" }
+    };
 }
 
 <!DOCTYPE html>
@@ -28,7 +34,10 @@
     <div class="container body-content">
         @foreach (var message in messages)
         {
-            <div>@message.Type.ToString(): @message.Message</div>
+            <div class="alert @mapping[message.Type] fade in">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                @message.Message
+            </div>
         }
         @RenderBody()
         <hr />
