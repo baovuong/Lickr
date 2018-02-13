@@ -28,7 +28,7 @@ namespace Lickr
             
             services.AddTransient<ISongDispenser, MockSongDispenser>();
 
-            services.AddTransient<ISongHandler, YoutubeSongHandler>();
+            services.AddTransient<YoutubeSongHandler>();
             services.AddTransient(factory => 
             {
                 Func<SourceType, ISongHandler> accessor = key =>

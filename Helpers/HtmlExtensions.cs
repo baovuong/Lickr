@@ -9,19 +9,9 @@ namespace Lickr.Helpers
 {
     public static class HtmlExtensions 
     {
-        public static IHtmlContent SongDisplayFor(this IHtmlHelper html, Song song)
-        {
-            ISongHandler handler;
-            switch (song.Type)
-            {
-                case SourceType.YOUTUBE:
-                    handler = new YoutubeSongHandler();
-                    break;
-                default:
-                    handler = null;
-                    break;
-            }
-            return handler?.Present(html, song);
-        }
+        public static IHtmlContent SongDisplayFor(
+            this IHtmlHelper html, 
+            Song song, 
+            Func<SourceType, ISongHandler> handlerResolver) => handlerResolver(song.Type).Present(html, song);
     }
 }

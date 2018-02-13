@@ -1,5 +1,7 @@
 @using Lickr.Helpers
+@using Lickr.SongHandlers
 @model Lickr.Models.Song
+@inject Func<SourceType, ISongHandler> HandlerResolver
 
 @{
     ViewData["Title"] = "Home Page";
@@ -10,6 +12,6 @@
 </h1>
 <div id="lick">
     <h2>@Model.Title by @Model.Artist</h2>
-    @Html.SongDisplayFor(Model)
+    @Html.SongDisplayFor(Model, HandlerResolver)
 </div>
 <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Next</a>
