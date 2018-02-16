@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Lickr.Dispensers;
+using Lickr.Models;
 
 namespace Lickr.Controllers
 {
@@ -18,6 +19,18 @@ namespace Lickr.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(UserCredentials model)
+        {
+            AddMessage("did the login");
             return View();
         }
 
