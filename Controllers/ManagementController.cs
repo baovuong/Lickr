@@ -24,19 +24,19 @@ namespace Lickr.Controllers
         [HttpPost]
         public IActionResult Enable(int id)
         {
-            return Json("enabling song");
+            return Json("enabling song " + id);
         }
 
         [HttpPost]
         public IActionResult Disable(int id)
         {
-            return Json("disabling song");
+            return Json("disabling song " + id);
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            return Json("deleting song");
+            return Json("deleting song " + id);
         }
     }
 }
