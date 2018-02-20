@@ -14,7 +14,9 @@ web app that displays a random song with "the Lick"
 
 ### via Visual Studio Code
 
-1. open the project folder
-2. go to the debug view
-3. select `.NET Core Launch (web)`
-4. run the `Debug` button
+1. if you need to install Visual Studio Code, find it here: https://code.visualstudio.com/
+2. open Visual Studio Code
+3. open the project folder
+4. go to the debug view
+5. select `.NET Core Launch (web)`
+6. run the `Debug` button
