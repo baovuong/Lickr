@@ -1,9 +1,12 @@
 using System;
+using Lickr.Models;
 
 namespace Lickr.GateKeepers
 {
     public interface IGateKeeper
     {
-        bool IsValid(string username, string password);
+        string Authenticate(string username, string password);
+        bool Deauthenticate(string sessionToken);
+        UserRole GetUserRole(string sessionToken);
     }
 }
