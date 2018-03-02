@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Lickr.Dispensers;
 using Lickr.Models;
+using Lickr.GateKeepers;
 
 namespace Lickr.Controllers
 {
     public class ManagementController : BaseController
     {
         private readonly ISongDispenser _songDispenser;
-        public ManagementController(ISongDispenser songDispenser)
+        private readonly IGateKeeper _gateKeeper;
+        public ManagementController(ISongDispenser songDispenser, IGateKeeper gateKeeper)
         {
             _songDispenser = songDispenser;
+            _gateKeeper = gateKeeper;
         }
 
         public IActionResult Index()
