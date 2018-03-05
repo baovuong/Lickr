@@ -34,6 +34,14 @@ namespace Lickr.Controllers
         public IActionResult Login(UserCredentials model)
         {
             AddMessage("did the login");
+            var sessionToken = _gateKeeper.Authenticate(model.Username, model.Password);
+
+            if (sessionToken != null) 
+            {
+                return RedirectToAction("index");
+            }
+
+            // TODO store token in cookie or something
             return View();
         }
 
